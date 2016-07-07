@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--        <script src="C:\Users\HerpDerp\Documents\CS 290\How-To Guide\bootstrap.min.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="how-to.css">
+        <script src="script.js"></script>
+        <title>How-To Guide</title>
+        
+    </head>
+    <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="how-to.html">How-To Guide: Hearthstone API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="nav-1"><a href="how-to.html">Set-Up</a></li>
+                    <li id="nav-2"><a href="page2.html">Endpoints</a></li>
+                    <li id="nav-3"><a href="page3.html">Working with Card Information</a></li>
+                    <li id="nav-4"><a href="page4.html">Multiple Cards</a></li>
+                    <li id="nav-5"><a href="page5.html">Next Steps</a></li>
+                </ul>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron">
+                    <h1 class"">Handling Multiple Cards</h1>
+                </div>
+            </div>
+        </div>
+    
+        <p>As mentioned in the previous section, the response from the API returns an array because often users of the API will be making calls for multiple cards. This may be a little different for some of you who have worked with APIs that do not return in this type of syntax. As such, this section explores how to work with an array of multiple cards. The request will be very similar, though we'll walk through some Javascript that highlights what we can do with multiple cards.</p>
+        <h3>Multiple Card JSON Response Body</h3>
+        <p>Say our goal was to show all cards with power 2, health 3, and a cost of 2 in the The Grand Tournament expansion.  In this case, the start of our response request should be pretty similar to what we did before.<br>
+        <pre>
+        var req = new XMLHttpRequest();
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/The Grand Tournament');
+        req.setRequestHeader('x-mashape-key','YOUR_API_KEY_HERE');
+        req.send();</pre>
+        From here, however, our Javascript starts to look different. We still need to parse through the JSON the API sent to us, but we need to separate the cards that meet our criteria. To do this, we'll need to create a new array and push the cards we want. Once the array is full of the correct cards, we can then work with variable to output them to our website (or whatever it is we want to do with them). In the example below, we create the <code>createCard()</code> function that appends each image to the appropriate div. For reference, at this point we have the following html element <code>&lt;div class="container"&gt;&lt;div class="jumbotron" id="TGT"&gt;&lt;/div&gt;&lt;/div&gt;</code>.</p>
+        <pre>
+        req.addEventListener('load',function(){
+            var response = JSON.parse(req.responseText);
+            console.log(response);
+            var images = [];
+            for (var i = 0; i < response.length; i++){
+                if (response[i].attack == 2 && response[i].health == 3 && response[i].cost == 2)
+                     images.push(response[i]);
+            }
+            console.log(images);
+            images.forEach(createCard)
+        });
+  
+        function createCard(element, index, array){
+            var card = document.createElement('img')
+            card.src = element.img
+            var div = document.getElementById("TGT");
+            div.appendChild(card)
+        }
+        </pre>
+        <p>The forEach function takes a single function that it will execute on each element in the variable, in this case, images. The createCard function creates an image HTML element and appends the according element image to the div DOM variable. After this is done to each card, the output should be similar to the images below.</p>
+        <div class="wrapper"><div class="jumbotron" id="TGT"></div></div>
+        <p>... and there you go! This is one application of the response you will get when you request multiple cards from the API. There are plenty more ways to utilize this API, but that is for you to figure out! To get you started, though, the next page will features some ways to branch out.</p>
+    </div>
+    <nav>
+        <ul class="pager">
+            <li><a href="page3.html">Previous</a></li>
+            <li><a href="page5.html">Next</a></li>
+        </ul>    
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+      <p>Powered by <a href="http://getbootstrap.com">Bootstrap</a>. Copyright 2016, Max MacEachern.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        var req = new XMLHttpRequest();
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/sets/The Grand Tournament');
+        req.setRequestHeader('x-mashape-key', key);
+        req.send();
+        req.addEventListener('load',function(){
+            var response = JSON.parse(req.responseText);
+            console.log(response);
+            var images = [];
+            for (var i = 0; i < response.length; i++){
+                if (response[i].attack == 2 && response[i].health == 3 && response[i].cost == 2)
+                     images.push(response[i]);
+            }
+            console.log(images);
+            images.forEach(createCard)
+        });
+  
+        function createCard(element, index, array){
+            var card = document.createElement('img')
+            card.src = element.img
+            var div = document.getElementById("TGT");
+            div.appendChild(card)
+        }
+        var active = document.getElementById("nav-4");
+        active.className += "active";
+    </script>
+      
+    </body>
+        

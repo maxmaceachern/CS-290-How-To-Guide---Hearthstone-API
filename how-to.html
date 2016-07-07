@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--        <script src="C:\Users\HerpDerp\Documents\CS 290\How-To Guide\bootstrap.min.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+        <title>How-To Guide</title>
+        
+    </head>
+    <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="how-to.html">How-To Guide: Hearthstone API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="nav-1"><a href="how-to.html">Set-Up</a></li>
+                    <li id="nav-2"><a href="page2.html">Endpoints</a></li>
+                    <li id="nav-3"><a href="page3.html">Working with Card Information</a></li>
+                    <li id="nav-4"><a href="page4.html">Multiple Cards</a></li>
+                    <li id="nav-5"><a href="page5.html">Next Steps</a></li>
+                </ul>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron">
+                    <h1 class"">Getting Started with the Hearthstone: Heroes of Warcraft API</h1>
+                </div>
+            </div>
+        </div>
+    
+    <p>This guide aims to highlight the core functionality of the <a href="http://hearthstoneapi.com/">Hearthstone API</a>, developed by <a href="https://market.mashape.com/omgvamp">omgvamp</a>. Hearthstone: Heroes of Warcraft is a digital collectable card game developed by Blizzard Entertainment. This particular API, in spite of its very generic and official sounding name, is <B>NOT</B> developed by Blizzard. They have not released an official API for the game in the same way they have with some of their other games such as World of Warcraft or Starcraft II. Instead, this API is available on the <a href="https://market.mashape.com/omgvamp/hearthstone">Mashape Marketplace.</a> The marketplace offers free, freemium, and paid APIs, though the Hearthstone API is free to use.</p>
+    <h3>Mashape Setup</h3>
+    <p>If you've never used an API hosted by <a href="https://www.market.mashape.com/">Mashape</a> before, it is a web platform for APIs. To get started using the API, you'll want to create a Mashape account (which is free) either through connecting it to your Github or through an email.</p>
+    <p><img class="img-responsive center-block" src="mashape getting started.PNG" alt="mashape start" /></p>
+    <h3>Mashape API Keys</h3>
+    <p>Once you have a Mashape account, the next step is to start following the API. Instead of getting an API key for each API you are following, Mashape allows applications to utilize multiple APIs with one key. Mashage gives you a 'Default Application' that you can use to get started quickly or you can create an application specific to your project. Either way, head into the application and you'll find a 'Get The Keys' button that gives you two keys, one for production and another for testing.</p>
+    <p><img class="img-responsive center-block" src="mashape keys.PNG" alt="mashape key" /></p>
+    <p>While you are able to easily regenerate API keys if you see malicious activity, it is probably best to assign the key to a variable in a separate file and include that file in any pages you are working with. With that in mind, whenever you see "YOUR_API_KEY_HERE" in the example code, that means you should put your unique API key in place of that.</p>
+    </div>
+    <nav>
+        <ul class="pager">
+            <li><a href="page2.html">Next</a></li>
+        </ul>    
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+      <p>Powered by <a href="http://getbootstrap.com">Bootstrap</a>. Copyright 2016, Max MacEachern.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        var active = document.getElementById("nav-1");
+        active.className += "active";
+    </script>
+      
+    </body>
+        

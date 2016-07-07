@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--        <script src="C:\Users\HerpDerp\Documents\CS 290\How-To Guide\bootstrap.min.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>How-To Guide</title>
+        
+    </head>
+    <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="how-to.html">How-To Guide: Hearthstone API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="nav-1"><a href="how-to.html">Set-Up</a></li>
+                    <li id="nav-2"><a href="page2.html">Endpoints</a></li>
+                    <li id="nav-3"><a href="page3.html">Working with Card Information</a></li>
+                    <li id="nav-4"><a href="page4.html">Multiple Cards</a></li>
+                    <li id="nav-5"><a href="page5.html">Next Steps</a></li>
+                </ul>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron">
+                    <h1 class"">Hearthstone API Endpoints</h1>
+                </div>
+            </div>
+        </div>
+    
+        <p>Now that we are set up with Mashape, let's take a look at how to get information back that we can use. First, we'll want to set up a new <code>XMLHttpRequest</code> object. Next, we'll make a GET request to the Hearthstone API. Hopefully this is familiar to you, but if it is not, we'll want to use the open method, passing it the DOMString method (i.e. GET) and the DOMString URL, which will be in the form <code>https://omgvamp-hearthstone-v1.p.mashape.com/[stuff]</code> where stuff are additional specifications, depending on what you want to receive (see below). Most often, we'll be returning a card or cards, but the Hearthstone API also allows you to return cardbacks as well. We'll cover both examples later on. From here, the next step is to set the request header, passing the <code>setRequestHeader</code> method two parameters, the DOMString header and DOMString value. In other words, we'll need to define the type of key, in this case it will always be in the form <code>'x-mashape-key'</code> and the actual key itself. Once these lines have been written, we'll send the request to the server. Your code should look similar to the code below.<br>
+        <pre>
+        var req = new XMLHttpRequest();<br>
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/EX1_572');<br>
+        req.setRequestHeader('x-mashape-key','YOUR_API_KEY_HERE');<br>
+        req.send();</pre>
+        </p>
+        <h3>Endpoints</h3>
+        <p>Before we examine what the API returns, let's go over the different endpoints we have to work with. Here is an overview of all the endpoints offered, which you can look at in more detail in the <a href="https://market.mashape.com/omgvamp/hearthstone">documentation</a>.</p>
+        <div class="table-responsive, table-bordered">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Definition</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>All Cards</td>
+                        <td>/cards</td>
+                        <td>Returns all Hearthstone cards</td>
+                    </tr>
+                    <tr>
+                        <td>Card Backs</td>
+                        <td>/cardbacks</td>
+                        <td>Returns all of the Hearthstone cardbacks</td>
+                    </tr>
+                    <tr>
+                        <td>Card Search</td>
+                        <td>/cards/search/{name}</td>
+                        <td>Returns a list of all cards that contain the searched word in their name</td>
+                    </tr>
+                    <tr>
+                        <td>Card Set</td>
+                        <td>/cards/sets/{set}</td>
+                        <td>Returns all Hearthstone cards in the given set</td>
+                    </tr>
+                    <tr>
+                        <td>Cards by Class</td>
+                        <td>/cards/classes/{class}</td>
+                        <td>Returns all Hearthstone cards of the given class</td>
+                    </tr>
+                    <tr>
+                        <td>Cards by Faction</td>
+                        <td>/cards/factions/{faction}</td>
+                        <td>Returns all Hearthstone cards of a given faction</td>
+                    </tr>
+                    <tr>
+                        <td>Cards by Quality</td>
+                        <td>/cards/qualities/{quality}</td>
+                        <td>Returns all Hearthstone cards of the given quality (i.e. Legendary, Epic, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td>Cards by Race</td>
+                        <td>/cards/races/{race}</td>
+                        <td>Returns all Hearthstone cards of the given race (i.e. Pirate, Beast, etc.)</td>
+                    </tr>
+                     <tr>
+                        <td>Cards by Type</td>
+                        <td>/cards/types/{type}</td>
+                        <td>Returns all Hearthstone cards of the given type (i.e. Minion, Spell, etc.)</td>
+                    </tr>
+                     <tr>
+                        <td>Info</td>
+                        <td>/cards/info</td>
+                        <td>Returns the current patch, classes, sets, types, factions, qualities, races, and locales</td>
+                    </tr>
+                     <tr>
+                        <td>Single Card</td>
+                        <td>/cards/{name}</td>
+                        <td>Returns the Hearthstone card by name or ID</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><br>
+        <p>Now that we have a handle on the endpoints we can access with the API, let's see what we can actually do with the information returned by the call!</p>
+    </div>
+    <nav>
+        <ul class="pager">
+            <li><a href="how-to.html">Previous</a></li>
+            <li><a href="page3.html">Next</a></li>
+        </ul>    
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+      <p>Powered by <a href="http://getbootstrap.com">Bootstrap</a>. Copyright 2016, Max MacEachern.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        var active = document.getElementById("nav-2");
+        active.className += "active";
+    </script>
+      
+    </body>
+        

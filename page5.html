@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--        <script src="C:\Users\HerpDerp\Documents\CS 290\How-To Guide\bootstrap.min.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>How-To Guide</title>
+        
+    </head>
+    <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="how-to.html">How-To Guide: Hearthstone API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="nav-1"><a href="how-to.html">Set-Up</a></li>
+                    <li id="nav-2"><a href="page2.html">Endpoints</a></li>
+                    <li id="nav-3"><a href="page3.html">Working with Card Information</a></li>
+                    <li id="nav-4"><a href="page4.html">Multiple Cards</a></li>
+                    <li id="nav-5"><a href="page5.html">Next Steps</a></li>
+                </ul>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron">
+                    <h1 class"">Moving Forward</h1>
+                </div>
+            </div>
+        </div>
+    
+        <p>There you have it! That's the Hearthstone API. While not developed by Blizzard, it does a good job of mimicing what they would develop or are developing and is very functional. Moving forward, I would recommend you focus on a few different aspects of the API. First, much of the example code we looked at was oriented toward handling the JSON of Minions. Spells, Weapons, and other card types will have their own unique attributes that were not covered here and I encourage you to learn more about those. Further, the API also returns non-collectible cards that are associated with the single player Adventures and other aspects of the game. It would be a good idea to understand those aspects of the API as well. To help you move forward, below are a few links to reference materials and other useful documentation. With that said, good luck!</p>
+        <h3>Additional Information</h3>
+        <dl>
+            <dt><a href="http://hearthstoneapi.com/">Hearthstone API website</a></dt>
+            <dt><a href="https://market.mashape.com/omgvamp/hearthstone">Hearthstone API Mashape page</a></dt>
+            <dt><a href="https://dev.battle.net/">Blizzard development page for other Blizzard APIs</a></dt>
+            <dt><a href="https://www.npmjs.com/package/hearthstone-mashape">Hearthstone API wrapper for Node.js</a></dt>
+            <dt><a href="http://docs.mashape.com/?utm_source=Mashape&utm_medium=Header&utm_content=Docs&utm_campaign=Mashape-Home">Mashape Documentation</a></dt>
+        </dl>
+    <nav>
+        <ul class="pager">
+            <li><a href="page4.html">Previous</a></li>
+        </ul>    
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+      <p>Powered by <a href="http://getbootstrap.com">Bootstrap</a>. Copyright 2016, Max MacEachern.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        var active = document.getElementById("nav-5");
+        active.className += "active";
+    </script>
+      
+    </body>
+        

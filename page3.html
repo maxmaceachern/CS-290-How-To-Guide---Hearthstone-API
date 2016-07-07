@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--        <script src="C:\Users\HerpDerp\Documents\CS 290\How-To Guide\bootstrap.min.js"></script>-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="how-to.css">
+        <script src="script.js"></script>
+        <title>How-To Guide</title>
+        
+    </head>
+    <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="how-to.html">How-To Guide: Hearthstone API</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="nav-1"><a href="how-to.html">Set-Up</a></li>
+                    <li id="nav-2"><a href="page2.html">Endpoints</a></li>
+                    <li id="nav-3"><a href="page3.html">Working with Card Information</a></li>
+                    <li id="nav-4"><a href="page4.html">Multiple Cards</a></li>
+                    <li id="nav-5"><a href="page5.html">Next Steps</a></li>
+                </ul>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="jumbotron">
+                    <h1 class"">API Response Body</h1>
+                </div>
+            </div>
+        </div>
+    
+        <p>At this point in the process, we have made the request and, provided everything works correctly, have a response body to interact with. Inspecting the various endpoints reveals there are three types of responses a call can return. They are a single card or collection of cards (both are arrays), cardbacks, and general information about patches, classes, types, and so forth. For the moment, we'll focus on processing a single card and in the next section we'll work through processing multiple cards received in a response body. Even though, when a single card request is made, the JSON response is still an array, even though it holds a single card. As such, to access the card information, the array number must be included (zero for single cards). For example, if we want to return the name of the card to the console, the request would look like this: <code>console.log(response[0].name)</code>.</p>
+        <h3>Single Card JSON Response Body</h3>
+        <p>At this point in time, our response request should look like something similar to this.<br>
+        <pre>
+        var req = new XMLHttpRequest();<br>
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/EX1_572');<br>
+        req.setRequestHeader('x-mashape-key','YOUR_API_KEY_HERE');<br>
+        req.send();<br>
+        req.addEventListener('load',function(){<br>
+            var response = JSON.parse(req.responseText);<br>
+            console.log(response);<br>
+        });</pre>
+        A single card can be returned by either the name or ID. Any given ID will return a unique card, though some cards have the same name and the response body will return each when you make the call. Taking a look at the console log, we can see exactly what information we get back in the JSON object. Here are the attributes included in the response object along with the value type:</p>
+        <dl>
+            <dt>cardID</dt>
+            <dd>The unique card ID for a single card (string)</dd>
+            <dt>name</dt>
+            <dd>The card's name (string)</dd>
+            <dt>cardSet</dt>
+            <dd>The set the card is from (string)</dd>
+            <dt>type</dt>
+            <dd>The card type (string)</dd>
+            <dt>faction</dt>
+            <dd>The card faction (string)</dd>
+            <dt>rarity</dt>
+            <dd>The card rarity (string)</dd>
+            <dt>cost</dt>
+            <dd>The card mana cost (integer)</dd>
+            <dt>attack</dt>
+            <dd>The card attack, if it is a minion (integer)</dd>
+            <dt>health</dt>
+            <dd>The card health, if it is a minion (integer)</dd>
+            <dt>text</dt>
+            <dd>The card rules text (string)</dd>
+            <dt>flavor</dt>
+            <dd>The card flavor text (string)</dd>
+            <dt>artist</dt>
+            <dd>Artist of the card (string)</dd>
+            <dt>collectible</dt>
+            <dd>If the card is available in a collection. Not all cards are available to players (boolean)</dd>
+            <dt>elite</dt>
+            <dd>Only one elite card can be included in a deck (boolean)</dd>
+            <dt>race</dt>
+            <dd>The card race type, if it is a minion (string)</dd>
+            <dt>img</dt>
+            <dd>A http link to the card image, formatted in .png (image)</dd>
+            <dt>imgGold</dt>
+            <dd>A http link to the image of the golden version of the card, formatted in .gif (image)</dd>
+            <dt>locale</dt>
+            <dd>The language of the card, defaulting to enUS (string)</dd>
+        </dl>
+        <p>Now this is all fine and dandy, but what can we actually do with it? We'll take a look at a more complex way of working with the information returned by the request, but let's try simply using the information returned to display a card image. For example, this html <code>&lt;img id="finley"&gt;&lt;/img&gt;&lt;img id="golden finley"&gt;&lt;/img&gt;</code> along with the following Javascript (including the request for clarity):</p>
+        <pre>
+        var req = new XMLHttpRequest();
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/Sir Finley Mrrgglton');
+        req.setRequestHeader('x-mashape-key','YOUR_API_KEY_HERE');
+        req.send();
+        req.addEventListener('load',function(){
+            var response = JSON.parse(req.responseText);
+            console.log(response);
+            document.getElementById('finley').src = response[0].img;
+            document.getElementById('golden finley').src = response[0].imgGold;
+        });
+        </pre>
+        <p>will display the following images...</p>
+        <div class="wrapper"><div class="jumbotron"><img id="finley"></img><img id="golden finley"></img></div></div>
+        <p>Pretty neat huh? Well, let's move forward and try working with multiple cards.</p>
+    </div>
+    <nav>
+        <ul class="pager">
+            <li><a href="page2.html">Previous</a></li>
+            <li><a href="page4.html">Next</a></li>
+        </ul>    
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-footer">
+            <p>Powered by <a href="http://getbootstrap.com">Bootstrap</a>. Copyright 2016, Max MacEachern.</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        var req = new XMLHttpRequest();
+        req.open('get','https://omgvamp-hearthstone-v1.p.mashape.com/cards/Sir Finley Mrrgglton');
+        req.setRequestHeader('x-mashape-key', key);
+        req.send();
+        req.addEventListener('load',function(){
+            var response = JSON.parse(req.responseText);
+            console.log(response);
+            console.log(response[0].cardId,response[0].name,response[0].type,response[0].cost,response[0].attack,response[0].health);
+            document.getElementById('finley').src = response[0].img;
+            document.getElementById('golden finley').src = response[0].imgGold;
+        });
+        var active = document.getElementById("nav-3");
+        active.className += "active";
+    </script>
+      
+    </body>
+        
